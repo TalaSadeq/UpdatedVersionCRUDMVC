@@ -1,0 +1,23 @@
+<%- include('../../partials/headerLayout.ejs', {pageName: "category", pageTitle: "category", pathLevel: "/"}) %>
+
+
+<h3>Update Slides</h3>
+
+<table>
+    <tr>
+        <td>
+            <form action="/dashboard/category/update" method="post" >
+                <label for="title">title</label>
+                <input type="text" name="catName" id="catName" value="<%=oneProduct[0].catName%>">
+                <br>
+
+                <input type="hidden" name="id" value="<%= oneProduct[0].id %>">
+
+                <input type="submit" value="Update Product">
+            </form>
+        </td>
+    </tr>
+</table>
+
+
+<%- include('../../partials/footerLayout.ejs', { pathLevel : "/"}) %>

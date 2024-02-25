@@ -1,0 +1,24 @@
+<%- include('../../partials/headerLayout.ejs', {pageName: "projects", pageTitle: "Projects", pathLevel: "/"}) %>
+
+<%if(Oneproject.length > 0) {%>
+    <table border width="100%">
+        <tr>
+            <th>Title</th>
+            <th><%= Oneproject[0].title %></th>   <!-- oneProduct is array [0] -->
+            <th rowspan="3">
+                <img src="../../../uploads/<%=Oneproject[0].photo%>" width="450" alt="">
+            </th>
+        </tr>
+        <tr>
+            <th>Project descriptiom</th>
+            <th><%=Oneproject[0].description %></th>
+        </tr>
+        
+    </table>
+<%}
+else {%>
+    <h3>No slides with this information !!!</h3>
+<%}%>
+
+
+<%- include('../../partials/footerLayout.ejs', { pathLevel : "/"}) %>

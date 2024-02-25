@@ -1,0 +1,50 @@
+<%- include('../../partials/headerLayout.ejs', {pageName: "projects", pageTitle: "projects", pathLevel: "/"}) %>
+<br>
+<h1>Projects</h1><br>
+<a href="/dashboard/project/create">Insert project</a>
+<br><br>
+<%if(projects.length > 0){%>
+    <table border style="width: 100%">
+        <tr>
+            <th>project Title</th><th>project description</th><th>project photo</th>
+        </tr>    
+        <% projects.forEach((oneProject) => { %>
+            <tr>
+                <th><%= oneProject.title %></th>
+                <th><%= oneProject.description %></th>
+                <th>
+                    <a href="/dashboard/project/show/<%=oneProject.id%>">
+                        Details
+                    </a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="/dashboard/project/updateForm/<%=oneProject.id%>">
+                        Update
+                    </a>
+                    &nbsp;&nbsp;&nbsp;
+                    
+                    <span onclick="destroy(this);" productID="<%=oneProject.id%>" style="cursor: pointer;">
+                        Delete
+                    </span>
+                </th>
+            </tr>
+        <% }); %>
+    </table>
+<%}
+else {%>
+    <h3>No products created yet !!!!</h3>
+<%}%>
+
+<script>
+    function destroy(obj){
+        if(confirm("Are You Sure you want to Delete this Project ?")) {
+            id = obj.getAttribute("productID");
+            window.location.replace("/dashboard/project/destroy/" + id);
+        }        
+    }
+</script>
+
+
+
+
+
+<%- include('../../partials/footerLayout.ejs', { pathLevel : "/"}) %>

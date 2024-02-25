@@ -1,0 +1,84 @@
+<%- include('../../partials/headerLayout.ejs', {pageName: "OurWork", pageTitle: "OurWork", pathLevel: "/"}) %>
+
+<br>
+<h1>Our Work </h1><br>
+<h3>Add project to categories</h3>
+
+<form action="/dashboard/addProjectToCategory" method="post">
+
+<select id="categorySelect" onchange="showView()" name="catId">
+    <% if (categories.length > 0) { %>
+        <% categories.forEach((oneCategory) => { %>
+            <option value="<%= oneCategory.id %>"><%= oneCategory.catName %></option>
+        <% }); %>
+    <% } else { %>
+        <option value="">No Categories found</option>
+    <% } %>
+</select>
+
+<script>
+    // Function to show the corresponding view based on selected category
+    function showView() {
+        const selectedCategoryId = document.getElementById('categorySelect').value;
+        // Hide all views
+        const views = document.querySelectorAll('.category-view');
+        views.forEach(view => {
+            view.style.display = 'none';
+        });
+        // Show the corresponding view based on selected category
+        const selectedView = document.getElementById(`view-${selectedCategoryId}`);
+        if (selectedView) {
+            selectedView.style.display = 'block';
+        }
+    }
+</script>
+
+<% categories.forEach((oneCategory) => { %>
+    <div id="view-<%=oneCategory.id %>" class="category-view" style="display: none;">
+        View for <%= oneCategory.catName %>
+    </div>
+<% }); %> 
+
+<select id="proj" onchange="showViewTwo()" name="projId">
+    <% if (proj.length > 0) { %>
+        <% proj.forEach((oneProject) => { %>
+            <option value="<%= oneProject.id %>"><%= oneProject.title %></option>
+        <% }); %>
+    <% } else { %>
+        <option value="">No Categories found</option>
+    <% } %>
+</select>
+
+<script>
+    // Function to show the corresponding view based on selected category
+    function showViewTwo() {
+        const selectedCategoryId = document.getElementById('proj').value;
+        // Hide all views
+        const views = document.querySelectorAll('.category-view');
+        views.forEach(view => {
+            view.style.display = 'none';
+        });
+        // Show the corresponding view based on selected category
+        const selectedView = document.getElementById(`view-${selectedCategoryId}`);
+        if (selectedView) {
+            selectedView.style.display = 'block';
+        }
+    }
+</script>
+
+<% categories.forEach((oneProject) => { %>
+    <div id="view-<%= oneProject.id %>" class="category-view" style="display: none;">
+        View for <%= oneProject.title %>
+    </div>
+<% }); %>
+
+
+<button type="submit">Add Project to Category</button>
+
+</form>
+
+
+
+
+
+<%- include('../../partials/footerLayout.ejs', { pathLevel : "/"}) %>

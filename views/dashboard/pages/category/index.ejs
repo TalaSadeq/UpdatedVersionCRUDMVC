@@ -1,0 +1,81 @@
+<%- include('../../partials/headerLayout.ejs', {pageName: "category", pageTitle: "category", pathLevel: "/"}) %>
+<br>
+<h1>Categories</h1><br><br>
+
+<%if(categories.length > 0){%>
+    <table border style="width: 100%">
+        <tr>
+            <th>Category Name</th><th>Category details</th>
+        </tr>    
+        <%categories.forEach((oneCategory) => { %>
+            <tr>
+                <th><%=oneCategory.catName %></th>
+                <th>
+                     &nbsp;&nbsp;&nbsp;
+                    <a href="/dashboard/category/updateForm/<%=oneCategory.id%>">
+                        Edit Category
+                    </a>
+                    &nbsp;&nbsp;&nbsp;
+                    
+                    <span onclick="destroy(this);" productID="<%=oneCategory.id%>" style="cursor: pointer;">
+                        Delete
+                    </span>
+                </th>
+            </tr>
+        <% }); %>
+    </table>
+<%}
+else {%>
+    <h3>No products created yet !!!!</h3>
+<%}%>
+
+<script>
+    function destroy(obj){
+        if(confirm("Are You Sure you want to Delete this Project ?")) {
+            id = obj.getAttribute("productID");
+            window.location.replace("/dashboard/category/destroy/" + id);
+        }        
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br>
+
+
+
+
+<h2> Add a category</h2> 
+<table>
+    <tr>
+        <td>
+            <form action="/dashboard/banner/category/create" method="post" >
+                <label for="catName">Category Name </label>
+                <input type="text" name = "catName" id="catName">
+                <br>
+                 <script> console.log('User Input:', name);</script>
+              <input type="submit" value="Create New Category">
+            </form>
+        </td>
+    </tr>
+</table>
+
+
+
+
+
+<%- include('../../partials/footerLayout.ejs', { pathLevel : "/"}) %>

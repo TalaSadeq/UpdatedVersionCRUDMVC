@@ -1,0 +1,46 @@
+<%- include('../../partials/headerLayout.ejs', {pageName: "banner", pageTitle: "Banner Page", pathLevel: "/"}) %>
+
+<br>
+<a href="/dashboard/banner/createForm">Create New Slide</a>
+<br><br>
+<%if(slides.length > 0){%>
+    <table border style="width: 100%">
+        <tr>
+            <th>Slide Title</th><th>Details</th><th>Operations</th>
+        </tr>    
+        <% slides.forEach((oneSlide) => { %>
+            <tr>
+                <th><%= oneSlide.title %></th>
+                <th><%= oneSlide.details %></th>   
+                <th>
+                    <a href="/dashboard/banner/show/<%=oneSlide.id%>">
+                        Details
+                    </a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="/dashboard/banner/updateForm/<%=oneSlide.id%>">
+                        Update
+                    </a>
+                    &nbsp;&nbsp;&nbsp;
+                    
+                    <span onclick="destroy(this);" productID="<%=oneSlide.id%>" style="cursor: pointer;">
+                        Delete
+                    </span>
+                </th>
+            </tr>
+        <% }); %>
+    </table>
+<%}
+else {%>
+    <h3>No products created yet !!!!</h3>
+<%}%>
+
+<script>
+    function destroy(obj){
+        if(confirm("Are You Sure you want to Delete this Product ?")) {
+            id = obj.getAttribute("productID");
+            window.location.replace("/dashboard/banner/destroy/" + id);
+        }        
+    }
+</script>
+
+<%- include('../../partials/footerLayout.ejs', { pathLevel: "/" }) %>

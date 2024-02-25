@@ -1,0 +1,44 @@
+<%- include('../../partials/headerLayout.ejs', {pageName: "banner", pageTitle: "Banner Page", pathLevel: "/"}) %>
+
+
+<h3>Update Slides</h3>
+
+<table>
+    <tr>
+        <td>
+            <form action="/dashboard/banner/update" method="post" >
+                <label for="title">title</label>
+                <input type="text" name="title" id="title" value="<%= oneProduct[0].title%>">
+                <br>
+                <label for="details">details</details></label>
+                <input type="number" name="details" id="details" value="<%= oneProduct[0].details%>">
+                <br>
+                <label for="photo">photo</label>
+                <input type="file" name="photo" id="photo" onchange="photoPreviewFn(this);">
+                <br>
+
+                <input type="hidden" name="id" value="<%= oneProduct[0].id %>">
+
+                <input type="submit" value="Update Product">
+            </form>
+        </td>
+        <td>
+            <img src="/img/uploades/<%=oneProduct[0].photo%>" id="photoPreview" alt="photo preview" style="max-width: 55%; max-height: 55%;">
+        </td>
+    </tr>
+</table>
+
+<script>
+    function photoPreviewFn(inputFile) {
+        var file = inputFile.files[0];
+        if(file) {
+            var reader = new FileReader();
+            reader.onload = () => {
+                document.getElementById("photoPreview").setAttribute("src", reader.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+<%- include('../../partials/footerLayout.ejs', { pathLevel : "/"}) %>
